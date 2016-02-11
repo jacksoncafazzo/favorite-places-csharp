@@ -1,0 +1,15 @@
+<h3>Here are all the places you visited on this trip:</h3>
+<ol>
+@foreach (var places in @Model["places"])
+{
+  <li>@places.GetCity()
+    <ul>
+    <li>@places.GetPicture()</li>
+    <img src="@places.GetPopulation()">
+  </ul>
+  </li>
+}
+</ol>
+<p><a href='/categories/@Model["category"].GetId()/places/new'>Add a new place</a></p>
+<p><a href='/clearPlaces/@Model["category"].GetId()/'>Empty the places in this trip</a></p>
+<p><a href='/'>Return to Main Page</a></p>

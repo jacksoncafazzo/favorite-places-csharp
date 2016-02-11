@@ -1,0 +1,14 @@
+<h1>Please add the places you visited during your @Model["category"].GetName() Trip</h1>
+<form action="/places" method="post">
+<input id="category-id" type="hidden" value='@Model["category"].GetId()'>
+<label for="new-place">add a new place</label>
+<input id ="new-place" name="new-place" type="text">
+
+<label for="new-picture">add a new picture</label>
+<input id ="new-picture" name="new-picture" type="text">
+
+<label for="new-population">add a population</label>
+<input id ="new-population" name="new-population" type="number">
+<br><br>
+<button type="submit">Add place</button>
+</form>

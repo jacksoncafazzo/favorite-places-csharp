@@ -8,57 +8,57 @@ namespace Places.Objects
     private string _picture;
     private int _population;
     private int _id;
-    private static List<Place> _places = new List<Place> {};
+    private static List<Place> _instances = new List<Place> {};
 
     public Place (string city, string picture, int population)
     {
       _city = city;
       _picture = picture;
       _population = population;
-      _places.Add(this);  // <-- this refers to the Place we just made
-      _id = _places.Count;
+      _instances.Add(this);  // <-- this refers to the Place we just made
+      _id = _instances.Count;
     }   // getters & setters
     public string GetCity()
     {
       return _city;
     }
-    public void SetCity(string city)
-    {
-      _city = city;
-    }
+    // public void SetCity(string city)
+    // {                                   ///  <<< user sets thes
+    //   _city = city;
+    // }
     public string GetPicture()
     {
       return _picture;
     }
-    public void SetPicture(string picture)
-    {
-      _picture = picture;
-    }
+    // public void SetPicture(string picture)
+    // {
+    //   _picture = picture;
+    // }
     public int GetPopulation()
     {
       return _population;
     }
-    public void SetPopulation(int population)
-    {
-      _population = population;
-    }
+    // public void SetPopulation(int population)
+    // {
+    //   _population = population;
+    // }
     public int GetId()
     {
       return _id;
     }
     // Static methods
-    public static List<Place> GetAll()
+    public static List<Place> GetAllPlaces()
     {
-      return _places;
+      return _instances;
     }
-    public static void ClearAll()
+    public static void ClearAllPlaces()
     {
-      _places = new List<Place>() {};
+      _instances.Clear();
     }
-    // this method is run on a place (like a prototype maybe?) to get it's id number
-    public static Place Find(int id)
+    // this method is run on a place to get it's id number
+    public static Place Find(int searchId)
     {
-      return _places[id-1];
+      return _instances[searchId-1];
     }
   }
 }
