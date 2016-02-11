@@ -1,29 +1,30 @@
-using System;
 using System.Collections.Generic;
 
 namespace Places.Objects
 {
   public class Place
   {
-    private string _cityName;
+    private string _city;
     private string _picture;
     private int _population;
+    private int _id;
+    private static List<Place> _places = new List<Place> {};
 
-    private static List<Place> _instances = new List<Place> {};
-
-    public Place (string cityName, string picture, int population)
+    public Place (string city, string picture, int population)
     {
-      _cityName = cityName;
+      _city = city;
       _picture = picture;
       _population = population;
-    }
-    public string GetCityName()
+      _places.Add(this);  // <-- this refers to the Place we just made
+      _id = _places.Count;
+    }   // getters & setters
+    public string GetCity()
     {
-      return _cityName;
+      return _city;
     }
-    public void SetCityName(string cityName)
+    public void SetCity(string city)
     {
-      _cityName = cityName;
+      _city = city;
     }
     public string GetPicture()
     {
@@ -41,17 +42,23 @@ namespace Places.Objects
     {
       _population = population;
     }
+    public int GetId()
+    {
+      return _id;
+    }
+    // Static methods
     public static List<Place> GetAll()
     {
-      return _instances;
-    }
-    public void Save()
-    {
-      _instances.Add(this);
+      return _places;
     }
     public static void ClearAll()
     {
-      _instances.Clear();
+      _places = new List<Place>() {};
+    }
+    // this method is run on a place (like a prototype maybe?) to get it's id number
+    public static Place Find(int id)
+    {
+      return _places[id-1];
     }
   }
 }

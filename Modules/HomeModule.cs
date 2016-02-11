@@ -1,7 +1,7 @@
-using System;
 using Nancy;
 using Places.Objects;
 using System.Collections.Generic;
+using System;
 
 namespace Places
 {
@@ -10,25 +10,22 @@ namespace Places
     public HomeModule()
     {
 
-      Get["/"] = _ => View["add_new_place.cshtml"];
+      Get["/"] = _ => View["places.cshtml", Place.GetAll()]; // show the main page after sending it a list of place objects as Model
 
-      Post["/place_added"] = _ => {
+      Get["/city/{id}"] = parameters => { // each city is a link with a number added on we can reference with GetPlaceById()
+        Place place = Place.Find(parameters.id); // making a new place by
+        return View["place.cshtml", place];
+      };
+      Post["/add_place"] = _ => {
         int intPopulation = int.Parse(Request.Form["new-population"]);
-        Place newPlace = new Place (Request.Form["new-place"], Request.Form["new-picture"], intPopulation);
-        newPlace.Save();
-        Console.WriteLine(newPlace.GetPopulation());
-        return View["place_added.cshtml", newPlace];
+        Place newPlace = new Place (Request.Form["new-place"], Request.Form["new-picture"], intPopulation); // makes new place and puts it into the list of places
+        return View["places.cshtml", Place.GetAll()]; //show the main page again
+      };
+      Get["/places_clear"] = _ => { // changed Post to Get, very important. We want to get the signal called "/places_clear" and do these things...
+        Place.ClearAll();
+        return View["place.cshtml"];
       };
 
-      Post["/show_instances"] = _ => {
-        List<Place> instances = Place.GetAll();
-        return View["/show_instances.cshtml", instances];
-      };
-      Post["/places_cleared"] = _ => {
-        // List<Place> instances = Place.GetAll();
-        Place.ClearAll();
-        return View["show_places.cshtml"];
-      };
 
 
 

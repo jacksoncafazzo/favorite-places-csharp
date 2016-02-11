@@ -1,0 +1,12 @@
+@Html.Partial("header.cshtml")
+<h1>Your Favorite Visited Places</h1>
+<ul>
+  @foreach(var place in Model)
+  {
+    <li><a href="/city/@place.GetId()">@place.GetCity()</a></li>
+  }
+</ul>
+@Html.Partial("add_new_place.cshtml")
+<form action="/places_clear" method="post">
+  <button type="submit" name="button">Clear All Places</button>
+</form>
